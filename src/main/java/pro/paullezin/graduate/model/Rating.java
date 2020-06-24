@@ -32,6 +32,10 @@ public class Rating extends AbstractBaseEntity {
         this(r.getId(), r.getRestaurant(), r.getUser(), r.getDateTime(), r.getVote());
     }
 
+    public Rating(Restaurant restaurant, User user, LocalDateTime dateTime, Integer vote) {
+        this(null, restaurant, user, dateTime, vote);
+    }
+
     public Restaurant getRestaurant() {
         return restaurant;
     }

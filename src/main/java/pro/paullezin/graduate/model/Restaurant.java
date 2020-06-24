@@ -57,6 +57,10 @@ public class Restaurant extends AbstractNamedEntity {
         this.ratings = ratings;
     }
 
+    public int getVotesCount(){
+        return this.getRatings().size();
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
