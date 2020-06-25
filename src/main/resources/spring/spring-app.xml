@@ -6,9 +6,9 @@
 
 
     <context:component-scan base-package="pro.paullezin.**.repository"/>
-<!--
+
     <context:component-scan base-package="pro.paullezin.**.service"/>
 
-    <context:component-scan base-package="pro.paullezin.**.web"/>-->
+    <context:component-scan base-package="pro.paullezin.**.web"/>
 
 </beans>
