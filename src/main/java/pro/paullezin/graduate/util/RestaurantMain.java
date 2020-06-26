@@ -37,9 +37,9 @@ public class RestaurantMain {
         ratings1.add(rating1);
         ratings1.add(rating2);
 
-//        ratings2.add(rating3);
-//        ratings2.add(rating4);
-//        ratings2.add(rating5);
+        ratings2.add(rating3);
+        ratings2.add(rating4);
+        ratings2.add(rating5);
 
         ratings1.clear();
 
