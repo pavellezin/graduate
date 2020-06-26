@@ -25,6 +25,13 @@ public class Restaurant extends AbstractNamedEntity {
         this.web = web;
     }
 
+    public Restaurant(Integer id, String name, String address, String web, List<Rating> ratings) {
+        super(id, name);
+        this.address = address;
+        this.web = web;
+        this.ratings = ratings;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -68,6 +75,7 @@ public class Restaurant extends AbstractNamedEntity {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", web='" + web + '\'' +
+                ", votes=" + ratings +
                 '}';
     }
 

@@ -1,9 +1,9 @@
 package pro.paullezin.graduate.to;
 
 import pro.paullezin.graduate.model.Dish;
+import pro.paullezin.graduate.model.Restaurant;
 
 import java.util.List;
-import java.util.OptionalDouble;
 
 public class RestaurantTo {
     private final Integer id;
@@ -16,15 +16,19 @@ public class RestaurantTo {
 
     private final List<Dish> menu;
 
-    private final OptionalDouble rating;
+    private final Double rating;
 
-    public RestaurantTo(Integer id, String name, String address, String web, List<Dish> menu, OptionalDouble rating) {
+    public RestaurantTo(Integer id, String name, String address, String web, List<Dish> menu, Double rating) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.web = web;
         this.menu = menu;
         this.rating = rating;
+    }
+
+    public RestaurantTo(Restaurant restaurant, Double rating) {
+        this(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), rating);
     }
 
     public Integer getId() {
@@ -47,7 +51,7 @@ public class RestaurantTo {
         return menu;
     }
 
-    public OptionalDouble getRating() {
+    public Double getRating() {
         return rating;
     }
 
@@ -58,7 +62,7 @@ public class RestaurantTo {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", web='" + web + '\'' +
-                ", menu=" + !getMenu().isEmpty() +
+                ", menu=" + menu +
                 ", rating=" + rating +
                 '}';
     }
