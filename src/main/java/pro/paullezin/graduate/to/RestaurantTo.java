@@ -18,17 +18,20 @@ public class RestaurantTo {
 
     private final Double rating;
 
-    public RestaurantTo(Integer id, String name, String address, String web, List<Dish> menu, Double rating) {
+    private final boolean withMenu;
+
+    public RestaurantTo(Integer id, String name, String address, String web, List<Dish> menu, Double rating, boolean withMenu) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.web = web;
         this.menu = menu;
         this.rating = rating;
+        this.withMenu = withMenu;
     }
 
-    public RestaurantTo(Restaurant restaurant, Double rating) {
-        this(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), rating);
+    public RestaurantTo(Restaurant restaurant, boolean withMenu) {
+        this(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), restaurant.getRating(), withMenu);
     }
 
     public Integer getId() {
@@ -55,15 +58,17 @@ public class RestaurantTo {
         return rating;
     }
 
+    public boolean isWithMenu() {
+        return withMenu;
+    }
+
     @Override
     public String toString() {
         return "RestaurantTo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", web='" + web + '\'' +
-                ", menu=" + menu +
                 ", rating=" + rating +
+                ", withMenu=" + withMenu +
                 '}';
     }
 }

@@ -14,5 +14,9 @@ public interface RestaurantRepository {
     // null if not found
     Restaurant get(int id);
 
+    // ORDERED rating, name desc
     List<Restaurant> getAll();
+
+    // ORDERED rating, name desc
+    List<Restaurant> getWithMenu();
 }

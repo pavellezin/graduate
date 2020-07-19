@@ -30,6 +30,8 @@ public class RestaurantService {
         return repository.getAll();
     }
 
+    public List<Restaurant> getWithMenu() { return repository.getWithMenu(); }
+
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
         checkNotFoundWithId(repository.save(restaurant), restaurant.getId());

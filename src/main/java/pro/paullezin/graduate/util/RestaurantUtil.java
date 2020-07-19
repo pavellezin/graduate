@@ -16,20 +16,25 @@ public class RestaurantUtil {
     private RestaurantUtil() {
     }
 
-    private static RestaurantTo createTo(Restaurant restaurant, Double rating) {
-        return new RestaurantTo(restaurant, rating);
+    private static RestaurantTo createTo(Restaurant restaurant, boolean withMenu) {
+        return new RestaurantTo(restaurant, withMenu);
     }
 
-    public static List<RestaurantTo> getTos(Collection<Restaurant> restaurants, LocalDateTime dateTime, Predicate<Restaurant> filter) {
-        Map<Integer, Double> restaurantRatings = restaurants.stream()
-                .collect(
-                        Collectors.groupingBy(Restaurant::getId,
-                                Collectors.flatMapping(r -> r.getRatings().stream(), Collectors.averagingDouble(v -> v.getVote())))
-                );
+    public static List<RestaurantTo> filteredTos(Collection<Restaurant> restaurants, Predicate<Restaurant> filter) {
         return restaurants.stream()
                 .filter(filter)
-                .map(restaurant -> createTo(restaurant, restaurantRatings.get(restaurant.getId())))
+                .map(restaurant -> createTo(restaurant, restaurant.haveMenu()))
                 .collect(Collectors.toList());
     }
+
+    public static List<RestaurantTo> getAdminTos(Collection<Restaurant> restaurants) {
+        return filteredTos(restaurants, restaurant -> true);
+    }
+
+    public static List<RestaurantTo> getUserTos(Collection<Restaurant> restaurants) {
+        return filteredTos(restaurants, restaurant -> restaurant.haveMenu());
+    }
+
 }
+
 

@@ -27,3 +27,9 @@ P.S.: Make sure everything works with latest version that is on github :)
 P.P.S.: Asume that your API will be used by a frontend developer to build frontend on top of that.
 
 -----------------------------
+
+**View model:**
+
+**Regular user** receives a list of restaurants with today's menu. Restaurants are sorted by rating and name. User can rate the restaurant. User can't edit any other data.
+
+**Admin** receives a full list of restaurants (even without menu) and can edit restaurant's details and can edit today's menu. 

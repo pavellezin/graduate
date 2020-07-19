@@ -10,7 +10,7 @@ public class Restaurant extends AbstractNamedEntity {
 
     private List<Dish> menu;
 
-    private List<Rating> ratings;
+    private Double rating;
 
     public Restaurant() {
     }
@@ -25,11 +25,11 @@ public class Restaurant extends AbstractNamedEntity {
         this.web = web;
     }
 
-    public Restaurant(Integer id, String name, String address, String web, List<Rating> ratings) {
+    public Restaurant(Integer id, String name, String address, String web, Double rating) {
         super(id, name);
         this.address = address;
         this.web = web;
-        this.ratings = ratings;
+        this.rating = rating;
     }
 
     public String getAddress() {
@@ -56,16 +56,16 @@ public class Restaurant extends AbstractNamedEntity {
         this.menu = menu;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
+    public Double getRating() {
+        return rating;
     }
 
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
-    public int getVotesCount(){
-        return this.getRatings().size();
+    public boolean haveMenu() {
+        return this.menu != null && !this.menu.isEmpty();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Restaurant extends AbstractNamedEntity {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", web='" + web + '\'' +
-                ", votes=" + ratings +
+                ", rating=" + rating +
                 '}';
     }
 
