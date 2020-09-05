@@ -10,7 +10,7 @@ import java.util.List;
 import static pro.paullezin.graduate.util.ValidationUtil.checkNotFound;
 import static pro.paullezin.graduate.util.ValidationUtil.checkNotFoundWithId;
 
-//@Service
+@Service
 public class UserService {
 
     private final UserRepository repository;

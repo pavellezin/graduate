@@ -5,10 +5,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <context:component-scan base-package="pro.paullezin.**.repository"/>
-
     <context:component-scan base-package="pro.paullezin.**.service"/>
-
     <context:component-scan base-package="pro.paullezin.**.web"/>
 
 </beans>
