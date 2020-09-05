@@ -18,20 +18,26 @@ public class RestaurantTo {
 
     private final Double rating;
 
+    private final Integer userRating;
+
     private final boolean withMenu;
 
-    public RestaurantTo(Integer id, String name, String address, String web, List<Dish> menu, Double rating, boolean withMenu) {
+    private final boolean userCanVote;
+
+    public RestaurantTo(Integer id, String name, String address, String web, List<Dish> menu, Double rating, Integer userRating, boolean withMenu, boolean userCanVote) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.web = web;
         this.menu = menu;
         this.rating = rating;
+        this.userRating = userRating;
         this.withMenu = withMenu;
+        this.userCanVote = userCanVote;
     }
 
-    public RestaurantTo(Restaurant restaurant, boolean withMenu) {
-        this(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), restaurant.getRating(), withMenu);
+    public RestaurantTo(Restaurant restaurant, boolean withMenu, boolean userCanVote) {
+        this(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), restaurant.getRating(), restaurant.getUserRating(), withMenu, userCanVote);
     }
 
     public Integer getId() {
@@ -58,9 +64,13 @@ public class RestaurantTo {
         return rating;
     }
 
+    public Integer getUserRating() { return userRating; }
+
     public boolean isWithMenu() {
         return withMenu;
     }
+
+    public boolean isUserCanVote() { return userCanVote; }
 
     @Override
     public String toString() {
@@ -68,7 +78,10 @@ public class RestaurantTo {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", rating=" + rating +
+                ", userRating=" + userRating +
                 ", withMenu=" + withMenu +
+                ", userCanVote=" + userCanVote +
                 '}';
     }
+
 }

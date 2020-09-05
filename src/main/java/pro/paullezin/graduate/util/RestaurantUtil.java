@@ -16,14 +16,14 @@ public class RestaurantUtil {
     private RestaurantUtil() {
     }
 
-    private static RestaurantTo createTo(Restaurant restaurant, boolean withMenu) {
-        return new RestaurantTo(restaurant, withMenu);
+    private static RestaurantTo createTo(Restaurant restaurant, boolean withMenu, boolean userCanVote) {
+        return new RestaurantTo(restaurant, withMenu, userCanVote);
     }
 
     public static List<RestaurantTo> filteredTos(Collection<Restaurant> restaurants, Predicate<Restaurant> filter) {
         return restaurants.stream()
                 .filter(filter)
-                .map(restaurant -> createTo(restaurant, restaurant.haveMenu()))
+                .map(restaurant -> createTo(restaurant, restaurant.haveMenu(), canUserVote(restaurant)))
                 .collect(Collectors.toList());
     }
 
@@ -33,6 +33,10 @@ public class RestaurantUtil {
 
     public static List<RestaurantTo> getUserTos(Collection<Restaurant> restaurants) {
         return filteredTos(restaurants, restaurant -> restaurant.haveMenu());
+    }
+
+    protected static boolean canUserVote(Restaurant restaurant){
+        return DateTimeUtil.checkTimeIfUserCanVoteNow() || !restaurant.haveUserVote();
     }
 
 }

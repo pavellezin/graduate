@@ -19,6 +19,10 @@ public class DateTimeUtil {
     private DateTimeUtil() {
     }
 
+    public static boolean checkTimeIfUserCanVoteNow(){
+        return LocalDateTime.now().isBefore(LocalDate.now().atStartOfDay().plus(11, ChronoUnit.HOURS));
+    }
+
     public static LocalDateTime atStartOfDayOrMin(LocalDate localDate) {
         return localDate != null ? localDate.atStartOfDay() : MIN_DATE;
     }

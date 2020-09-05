@@ -12,6 +12,8 @@ public class Restaurant extends AbstractNamedEntity {
 
     private Double rating;
 
+    private Integer userRating;
+
     public Restaurant() {
     }
 
@@ -64,9 +66,15 @@ public class Restaurant extends AbstractNamedEntity {
         this.rating = rating;
     }
 
+    public Integer getUserRating() { return userRating; }
+
+    public void setUserRating(Integer userRating) { this.userRating = userRating; }
+
     public boolean haveMenu() {
         return this.menu != null && !this.menu.isEmpty();
     }
+
+    public boolean haveUserVote() {return this.userRating != null; }
 
     @Override
     public String toString() {
