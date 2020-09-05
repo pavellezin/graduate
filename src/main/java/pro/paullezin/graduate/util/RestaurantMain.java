@@ -32,10 +32,12 @@ public class RestaurantMain {
 
         restaurant1.setMenu(menu1);
 
-        List<RestaurantTo> restaurantTos = RestaurantUtil.getUserTos(restaurantList);
+        List<RestaurantTo> restaurantUserTos = RestaurantUtil.getUserTos(restaurantList);
+        List<RestaurantTo> restaurantAdminTos = RestaurantUtil.getAdminTos(restaurantList);
 //        List<RestaurantTo> restaurantTos = RestaurantUtil.getAdminTos(restaurantList);
         System.out.println("restaurant1 = " + restaurant1);
         System.out.println("restaurant2 = " + restaurant2);
-        System.out.println("restaurantTos = " + restaurantTos);
+        System.out.println("restaurantTos = " + restaurantUserTos);
+        System.out.println("restaurantTos = " + restaurantAdminTos);
     }
 }
