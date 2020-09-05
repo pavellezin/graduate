@@ -14,7 +14,7 @@ public class RestaurantUtil {
     }
 
     private static RestaurantTo createTo(Restaurant restaurant, boolean withMenu, boolean userCanVote) {
-        return new RestaurantTo(restaurant, withMenu, userCanVote);
+        return new RestaurantTo(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), restaurant.getRating(), restaurant.getUserRating(), withMenu, userCanVote);
     }
 
     public static List<RestaurantTo> filteredTos(Collection<Restaurant> restaurants, Predicate<Restaurant> filter) {

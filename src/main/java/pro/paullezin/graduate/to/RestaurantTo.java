@@ -1,7 +1,6 @@
 package pro.paullezin.graduate.to;
 
 import pro.paullezin.graduate.model.Dish;
-import pro.paullezin.graduate.model.Restaurant;
 
 import java.util.List;
 
@@ -34,10 +33,6 @@ public class RestaurantTo {
         this.userRating = userRating;
         this.withMenu = withMenu;
         this.userCanVote = userCanVote;
-    }
-
-    public RestaurantTo(Restaurant restaurant, boolean withMenu, boolean userCanVote) {
-        this(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getWeb(), restaurant.getMenu(), restaurant.getRating(), restaurant.getUserRating(), withMenu, userCanVote);
     }
 
     public Integer getId() {
