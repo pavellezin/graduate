@@ -1,8 +1,8 @@
 DROP TABLE user_roles IF EXISTS;
 DROP TABLE users IF EXISTS;
-DROP TABLE menu IF EXISTS;
-DROP TABLE rating IF EXISTS;
-DROP TABLE restaurants IF EXISTS;
+-- DROP TABLE menu IF EXISTS;
+-- DROP TABLE rating IF EXISTS;
+-- DROP TABLE restaurants IF EXISTS;
 DROP SEQUENCE global_seq IF EXISTS;
 
 CREATE SEQUENCE GLOBAL_SEQ AS INTEGER START WITH 100000;
@@ -14,8 +14,7 @@ CREATE TABLE users
     email            VARCHAR(255)            NOT NULL,
     password         VARCHAR(255)            NOT NULL,
     registered       TIMESTAMP DEFAULT now() NOT NULL,
-    enabled          BOOLEAN DEFAULT TRUE    NOT NULL,
-    calories_per_day INTEGER DEFAULT 2000    NOT NULL
+    enabled          BOOLEAN DEFAULT TRUE    NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx
     ON USERS (email);
