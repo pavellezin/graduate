@@ -35,8 +35,8 @@ public class RestaurantMain {
         List<RestaurantTo> restaurantAdminTos = RestaurantUtil.getAdminTos(restaurantList);
         System.out.println("restaurant1 = " + restaurant1);
         System.out.println("restaurant2 = " + restaurant2);
-        System.out.println("restaurantTos = " + restaurantUserTos);
-        System.out.println("restaurantTos = " + restaurantAdminTos);
+        System.out.println("UserTos = " + restaurantUserTos);
+        System.out.println("AdminTos = " + restaurantAdminTos);
         System.out.println(restaurant1.haveUserVote() + "  " + RestaurantUtil.canUserVote(restaurant1));
         System.out.println(restaurant2.haveUserVote() + "  " + RestaurantUtil.canUserVote(restaurant2));
     }

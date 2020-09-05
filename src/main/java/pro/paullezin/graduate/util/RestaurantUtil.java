@@ -1,13 +1,10 @@
 package pro.paullezin.graduate.util;
 
-import pro.paullezin.graduate.model.Rating;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.to.RestaurantTo;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -32,7 +29,7 @@ public class RestaurantUtil {
     }
 
     public static List<RestaurantTo> getUserTos(Collection<Restaurant> restaurants) {
-        return filteredTos(restaurants, restaurant -> restaurant.haveMenu());
+        return filteredTos(restaurants, Restaurant::haveMenu);
     }
 
     protected static boolean canUserVote(Restaurant restaurant){
@@ -40,5 +37,3 @@ public class RestaurantUtil {
     }
 
 }
-
-
