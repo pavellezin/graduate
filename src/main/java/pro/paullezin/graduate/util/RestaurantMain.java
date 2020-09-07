@@ -51,7 +51,7 @@ public class RestaurantMain {
             System.out.println();
             System.out.println(adminController.getAll());
             System.out.println();
-            adminController.delete(10000);
+            adminController.delete(100000);
             System.out.println(adminController.getAll());
         }
     }
