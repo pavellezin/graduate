@@ -1,10 +1,10 @@
 package pro.paullezin.graduate.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Dish extends AbstractBaseEntity {
-    private LocalDateTime dateTime;
+    private Date dateTime;
 
     private String description;
 
@@ -19,7 +19,7 @@ public class Dish extends AbstractBaseEntity {
         this(d.getId(), d.getDateTime(), d.getRestaurant(), d.getDescription(), d.getPrice());
     }
 
-    public Dish(Integer id, LocalDateTime dateTime, Restaurant restaurant, String description, BigDecimal price) {
+    public Dish(Integer id, Date dateTime, Restaurant restaurant, String description, BigDecimal price) {
         super(id);
         this.dateTime = dateTime;
         this.restaurant = restaurant;
@@ -27,15 +27,15 @@ public class Dish extends AbstractBaseEntity {
         this.price = price;
     }
 
-    public Dish(LocalDateTime dateTime, Restaurant restaurant, String description, BigDecimal price) {
+    public Dish(Date dateTime, Restaurant restaurant, String description, BigDecimal price) {
         this(null, dateTime, restaurant, description, price);
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
