@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Dish extends AbstractBaseEntity {
-    private Date dateTime;
+    private Date dateTime = new Date();
 
     private String description;
 

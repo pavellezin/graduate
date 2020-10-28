@@ -1,6 +1,8 @@
 package pro.paullezin.graduate.web;
 
 import pro.paullezin.graduate.model.AbstractBaseEntity;
+import pro.paullezin.graduate.model.Role;
+import pro.paullezin.graduate.model.User;
 
 public class SecurityUtil {
 
@@ -15,6 +17,10 @@ public class SecurityUtil {
 
     public static void setAuthUserId(int id) {
         SecurityUtil.id = id;
+    }
+
+    public static boolean authUserIsAdmin(User user) {
+        return user.getRoles().contains(Role.ADMIN);
     }
 
 }
