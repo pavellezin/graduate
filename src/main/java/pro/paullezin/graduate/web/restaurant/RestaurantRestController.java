@@ -18,7 +18,7 @@ import static pro.paullezin.graduate.util.RestaurantUtil.getUserTos;
 import static pro.paullezin.graduate.util.ValidationUtil.*;
 import static pro.paullezin.graduate.web.SecurityUtil.authUserIsAdmin;
 
-//@Controller
+@Controller
 public class RestaurantRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 

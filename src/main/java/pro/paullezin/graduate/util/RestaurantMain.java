@@ -4,6 +4,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pro.paullezin.graduate.model.*;
 import pro.paullezin.graduate.to.RestaurantTo;
+import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 import pro.paullezin.graduate.web.user.AdminRestController;
 
 import java.math.BigDecimal;
@@ -46,14 +47,16 @@ public class RestaurantMain {
         System.out.println(restaurant2.haveUserVote() + "  " + RestaurantUtil.canUserVote(restaurant2));
 
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml")) {
-            System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
+//            System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
             AdminRestController adminController = appCtx.getBean(AdminRestController.class);
+            RestaurantRestController restaurantRestController = appCtx.getBean(RestaurantRestController.class);
             adminController.create(new User(null, "123Name", "email@mail.ru", "password", Role.ADMIN));
             System.out.println();
-            System.out.println(adminController.getAll());
-            System.out.println();
-            adminController.delete(100000);
-            System.out.println(adminController.getAll());
+//            System.out.println(adminController.getAll());
+//            System.out.println();
+//            adminController.delete(100000);
+//            System.out.println(adminController.getAll());
+            System.out.println(restaurantRestController.getAll());
         }
     }
 }
