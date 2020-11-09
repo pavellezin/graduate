@@ -7,10 +7,14 @@ import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.model.Role;
 import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.to.RestaurantTo;
+import pro.paullezin.graduate.web.dish.DishRestController;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 import pro.paullezin.graduate.web.user.AdminRestController;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +30,8 @@ public class RestaurantMain {
         Restaurant restaurant1 = new Restaurant(3, "Restaurant 1", "Kaslinskaya str", "www.restaurant-1.com", 3.0);
         Restaurant restaurant2 = new Restaurant(4, "Restaurant 2", "Khudyakova str", "www.restaurant-2.com", null);
 
-        Dish dish1 = new Dish(11, new Date(), restaurant1, "Dish1", BigDecimal.valueOf(10));
-        Dish dish2 = new Dish(12, new Date(), restaurant1, "Dish1", BigDecimal.valueOf(20));
+        Dish dish1 = new Dish(11, LocalDate.now(), restaurant1, "Dish1", BigDecimal.valueOf(10));
+        Dish dish2 = new Dish(12, LocalDate.now(), restaurant1, "Dish1", BigDecimal.valueOf(20));
         menu1.add(dish1);
         menu1.add(dish2);
 
@@ -52,6 +56,7 @@ public class RestaurantMain {
 //            System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
             AdminRestController adminController = appCtx.getBean(AdminRestController.class);
             RestaurantRestController restaurantRestController = appCtx.getBean(RestaurantRestController.class);
+            DishRestController dishRestController = appCtx.getBean(DishRestController.class);
             adminController.create(new User(null, "123Name", "email@mail.ru", "password", Role.ADMIN));
             System.out.println();
 //            System.out.println(adminController.getAll());
@@ -59,6 +64,13 @@ public class RestaurantMain {
 //            adminController.delete(100000);
 //            System.out.println(adminController.getAll());
             System.out.println(restaurantRestController.getAll());
+            System.out.println(dishRestController.getAll(100003, LocalDate.now().minus(1, ChronoUnit.DAYS)));
+            dishRestController.delete(100006);
+            System.out.println(dishRestController.getAll(100003, LocalDate.now()));
+            Dish dish = dishRestController.get(100007);
+            dish.setDescription("New description");
+            dishRestController.update(dish, 100007);
+            System.out.println(dishRestController.getAll(100003, LocalDate.now()));
         }
     }
 }

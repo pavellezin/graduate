@@ -1,4 +1,4 @@
-package pro.paullezin.graduate.repository;
+package pro.paullezin.graduate.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
@@ -9,11 +9,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import pro.paullezin.graduate.model.Restaurant;
+import pro.paullezin.graduate.repository.RestaurantRepository;
 
 import java.util.List;
 
 @Repository
-public class JdbcRestaurantRepository implements RestaurantRepository{
+public class JdbcRestaurantRepository implements RestaurantRepository {
 
     private static final BeanPropertyRowMapper<Restaurant> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Restaurant.class);
 

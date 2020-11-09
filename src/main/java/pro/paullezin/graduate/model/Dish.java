@@ -1,10 +1,10 @@
 package pro.paullezin.graduate.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Dish extends AbstractBaseEntity {
-    private Date dateTime = new Date();
+    private LocalDate date = LocalDate.now();
 
     private String description;
 
@@ -16,27 +16,27 @@ public class Dish extends AbstractBaseEntity {
     }
 
     public Dish(Dish d) {
-        this(d.getId(), d.getDateTime(), d.getRestaurant(), d.getDescription(), d.getPrice());
+        this(d.getId(), d.getDate(), d.getRestaurant(), d.getDescription(), d.getPrice());
     }
 
-    public Dish(Integer id, Date dateTime, Restaurant restaurant, String description, BigDecimal price) {
+    public Dish(Integer id, LocalDate date, Restaurant restaurant, String description, BigDecimal price) {
         super(id);
-        this.dateTime = dateTime;
+        this.date = date;
         this.restaurant = restaurant;
         this.description = description;
         this.price = price;
     }
 
-    public Dish(Date dateTime, Restaurant restaurant, String description, BigDecimal price) {
+    public Dish(LocalDate dateTime, Restaurant restaurant, String description, BigDecimal price) {
         this(null, dateTime, restaurant, description, price);
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public Restaurant getRestaurant() {
@@ -67,8 +67,8 @@ public class Dish extends AbstractBaseEntity {
     public String toString() {
         return "Dish{" +
                 "id=" + id +
-                ", dateTime=" + dateTime +
-                ", restaurantName='" + restaurant.getName() + '\'' +
+                ", date=" + date +
+//                ", restaurantName='" + restaurant.getName() + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';

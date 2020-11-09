@@ -17,7 +17,7 @@ import static pro.paullezin.graduate.util.ValidationUtil.*;
 public class DishRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    //    @Autowired
+    @Autowired
     private DishRepository repository;
 
     public Dish get(int id) {
