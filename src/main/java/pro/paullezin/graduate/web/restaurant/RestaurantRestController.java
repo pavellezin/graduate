@@ -46,13 +46,14 @@ public class RestaurantRestController {
     }
 
     public void update(Restaurant restaurant, int id) {
+        log.info("update restaurant {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);
-        log.info("update restaurant {}", restaurant);
         Assert.notNull(restaurant, "restaurant must not be null");
         checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
     }
 
-    public Restaurant create(Restaurant restaurant, int id) {
+    public Restaurant create(Restaurant restaurant) {
+        log.info("create restaurant {}", restaurant);
         checkNew(restaurant);
         Assert.notNull(restaurant, "restaurant must not be null");
         return repository.save(restaurant);

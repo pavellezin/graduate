@@ -14,43 +14,41 @@ import static pro.paullezin.graduate.util.ValidationUtil.*;
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-
     @Autowired
     private UserRepository repository;
 
     public List<User> getAll() {
-        log.info("getAll");
+        log.info("getAll users");
         return repository.getAll();
     }
 
     public User get(int id) {
-        log.info("get {}", id);
+        log.info("get user with id={}", id);
         return checkNotFoundWithId(repository.get(id), id);
     }
 
     public User create(User user) {
-        log.info("create {}", user);
+        log.info("create user {}", user);
         Assert.notNull(user, "user must not be null");
         checkNew(user);
         return repository.save(user);
     }
 
     public void delete(int id) {
-        log.info("delete {}", id);
+        log.info("delete user with id={}", id);
         checkNotFoundWithId(repository.delete(id), id);
     }
 
     public void update(User user, int id) {
-        log.info("update {} with id={}", user, id);
+        log.info("update user {} with id={}", user, id);
         Assert.notNull(user, "user must not be null");
         assureIdConsistent(user, id);
         checkNotFoundWithId(repository.save(user), user.getId());
     }
 
     public User getByMail(String email) {
-        log.info("getByEmail {}", email);
+        log.info("get user by email {}", email);
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
-
 }

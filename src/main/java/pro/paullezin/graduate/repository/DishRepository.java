@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface DishRepository {
     // null if not found, when updated
-    Dish save(Dish dish, int restaurantId, LocalDate date, int userId);
+    Dish save(Dish dish);
 
     // false if not found
-    boolean delete(int id, int userId);
+    boolean delete(int id);
 
     // null if not found
-    Dish get(int id, int userId);
+    Dish get(int id);
 
-    // ORDERED dateTime asc
-    List<Dish> getAll(int restaurantId, LocalDate date, int userId);
+    // ORDERED id asc
+    List<Dish> getAll(int restaurantId, LocalDate date);
 }

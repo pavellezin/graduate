@@ -2,14 +2,16 @@ package pro.paullezin.graduate.util;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import pro.paullezin.graduate.model.*;
+import pro.paullezin.graduate.model.Dish;
+import pro.paullezin.graduate.model.Restaurant;
+import pro.paullezin.graduate.model.Role;
+import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.to.RestaurantTo;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 import pro.paullezin.graduate.web.user.AdminRestController;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
