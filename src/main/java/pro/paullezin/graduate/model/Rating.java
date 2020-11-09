@@ -1,6 +1,6 @@
 package pro.paullezin.graduate.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Rating extends AbstractBaseEntity {
     public static final Integer ONE_STAR = 1;
@@ -13,27 +13,27 @@ public class Rating extends AbstractBaseEntity {
 
     private User user;
 
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
     private Integer vote;
 
     public Rating() {
     }
 
-    public Rating(Integer id, Restaurant restaurant, User user, LocalDateTime dateTime, Integer vote) {
+    public Rating(Integer id, Restaurant restaurant, User user, LocalDate date, Integer vote) {
         super(id);
         this.restaurant = restaurant;
         this.user = user;
-        this.dateTime = dateTime;
+        this.date = date;
         this.vote = vote;
     }
 
     public Rating(Rating r) {
-        this(r.getId(), r.getRestaurant(), r.getUser(), r.getDateTime(), r.getVote());
+        this(r.getId(), r.getRestaurant(), r.getUser(), r.getDate(), r.getVote());
     }
 
-    public Rating(Restaurant restaurant, User user, LocalDateTime dateTime, Integer vote) {
-        this(null, restaurant, user, dateTime, vote);
+    public Rating(Restaurant restaurant, User user, LocalDate date, Integer vote) {
+        this(null, restaurant, user, date, vote);
     }
 
     public Restaurant getRestaurant() {
@@ -52,12 +52,12 @@ public class Rating extends AbstractBaseEntity {
         this.user = user;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public Integer getVote() {
@@ -72,9 +72,9 @@ public class Rating extends AbstractBaseEntity {
     public String toString() {
         return "Rating{" +
                 "id=" + id +
-                ", restaurantName='" + restaurant.getName() + '\'' +
-                ", userName='" + user.getName() + '\'' +
-                ", dateTime=" + dateTime +
+//                ", restaurantName='" + restaurant.getName() + '\'' +
+//                ", userName='" + user.getName() + '\'' +
+                ", date=" + date +
                 ", vote=" + vote +
                 '}';
     }
