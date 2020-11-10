@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pro.paullezin.graduate.model.Rating;
 import pro.paullezin.graduate.repository.RatingRepository;
 
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JdbcRatingRepository implements RatingRepository {
     private static final BeanPropertyRowMapper<Rating> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Rating.class);
 
@@ -35,6 +37,7 @@ public class JdbcRatingRepository implements RatingRepository {
     }
 
     @Override
+    @Transactional
     public Rating save(Rating rating, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", rating.getId())
@@ -55,6 +58,7 @@ public class JdbcRatingRepository implements RatingRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id, int userId) {
         return jdbcTemplate.update("DELETE FROM dishes WHERE id=? AND user_id=?", id, userId) != 0;
     }
