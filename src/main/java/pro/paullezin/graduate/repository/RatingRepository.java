@@ -15,5 +15,5 @@ public interface RatingRepository {
     Rating get(int id, int userId);
 
     // null if not found
-    Double getAll(int restaurantId, LocalDate date);
+    Double getAverageVote(int restaurantId, LocalDate date);
 }

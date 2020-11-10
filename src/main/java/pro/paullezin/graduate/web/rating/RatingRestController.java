@@ -17,7 +17,7 @@ import static pro.paullezin.graduate.util.ValidationUtil.*;
 public class RatingRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    //    @Autowired
+        @Autowired
     private RatingRepository repository;
 
     public Rating get(int id) {
@@ -26,9 +26,9 @@ public class RatingRestController {
         return checkNotFoundWithId(repository.get(id, userId), id);
     }
 
-    public Double getAll(int restaurantId, LocalDate date) {
+    public Double getAverageVote(int restaurantId, LocalDate date) {
         log.info("getAll rating for restaurant {} for date {}", restaurantId, date);
-        return repository.getAll(restaurantId, date);
+        return repository.getAverageVote(restaurantId, date);
     }
 
     public void delete(int id) {

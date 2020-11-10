@@ -2,30 +2,23 @@ package pro.paullezin.graduate.util;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import pro.paullezin.graduate.model.Dish;
-import pro.paullezin.graduate.model.Restaurant;
-import pro.paullezin.graduate.model.Role;
-import pro.paullezin.graduate.model.User;
+import pro.paullezin.graduate.model.*;
 import pro.paullezin.graduate.to.RestaurantTo;
 import pro.paullezin.graduate.web.dish.DishRestController;
+import pro.paullezin.graduate.web.rating.RatingRestController;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 import pro.paullezin.graduate.web.user.AdminRestController;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RestaurantMain {
 
     public static void main(String[] args) {
         List<Dish> menu1 = new ArrayList<>();
-
-//        User user1 = new User(1, "user1", "user1@mail.ru", "pass1", Role.USER);
-//        User user2 = new User(2, "user2", "user2@mail.ru", "pass2", Role.USER);
 
         Restaurant restaurant1 = new Restaurant(3, "Restaurant 1", "Kaslinskaya str", "www.restaurant-1.com", 3.0);
         Restaurant restaurant2 = new Restaurant(4, "Restaurant 2", "Khudyakova str", "www.restaurant-2.com", null);
@@ -57,12 +50,9 @@ public class RestaurantMain {
             AdminRestController adminController = appCtx.getBean(AdminRestController.class);
             RestaurantRestController restaurantRestController = appCtx.getBean(RestaurantRestController.class);
             DishRestController dishRestController = appCtx.getBean(DishRestController.class);
-            adminController.create(new User(null, "123Name", "email@mail.ru", "password", Role.ADMIN));
+            RatingRestController ratingRestController = appCtx.getBean(RatingRestController.class);
+            User newUser = adminController.create(new User(null, "123Name", "email@mail.ru", "password", Role.ADMIN));
             System.out.println();
-//            System.out.println(adminController.getAll());
-//            System.out.println();
-//            adminController.delete(100000);
-//            System.out.println(adminController.getAll());
             System.out.println(restaurantRestController.getAll());
             System.out.println(dishRestController.getAll(100003, LocalDate.now().minus(1, ChronoUnit.DAYS)));
             dishRestController.delete(100006);
@@ -71,6 +61,14 @@ public class RestaurantMain {
             dish.setDescription("New description");
             dishRestController.update(dish, 100007);
             System.out.println(dishRestController.getAll(100003, LocalDate.now()));
+            System.out.println(ratingRestController.getAverageVote(100003, LocalDate.of(2020, 11, 9)));
+            Restaurant basilio = restaurantRestController.get(100003);
+            Rating newVote = new Rating(null, basilio, newUser, LocalDate.of(2020,11,9),4);
+            ratingRestController.create(newVote);
+            System.out.println(ratingRestController.getAverageVote(100003, LocalDate.of(2020, 11, 9)));
+            newVote.setVote(2);
+            ratingRestController.update(newVote,100017);
+            System.out.println(ratingRestController.getAverageVote(100003, LocalDate.of(2020, 11, 9)));
         }
     }
 }

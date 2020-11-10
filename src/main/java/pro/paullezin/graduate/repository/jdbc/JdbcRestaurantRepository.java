@@ -42,7 +42,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
             Number newKey = insertRestaurant.executeAndReturnKey(parameterSource);
             restaurant.setId(newKey.intValue());
         } else if (namedParameterJdbcTemplate.update(
-                "UPDATE restaurants SET name=:name, address=:address, web=:web, rating=:rating" +
+                "UPDATE restaurants SET name=:name, address=:address, web=:web" +
                         " WHERE id=:id", parameterSource) == 0) {
             return null;
         }
