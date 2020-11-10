@@ -9,10 +9,10 @@ public interface RatingRepository {
     Rating save(Rating rating, int userId);
 
     // false if not found
-    boolean delete(int id);
+    boolean delete(int id, int userId);
 
     // null if not found
-    Rating get(int id);
+    Rating get(int id, int userId);
 
     // null if not found
     Double getAll(int restaurantId, LocalDate date);
