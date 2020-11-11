@@ -17,7 +17,7 @@ import static pro.paullezin.graduate.util.ValidationUtil.*;
 public class RatingRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-        @Autowired
+    @Autowired
     private RatingRepository repository;
 
     public Rating get(int id) {
