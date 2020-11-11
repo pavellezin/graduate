@@ -22,11 +22,14 @@ import static pro.paullezin.graduate.web.SecurityUtil.authUserIsAdmin;
 public class RestaurantRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private RestaurantRepository repository;
+    private final RestaurantRepository repository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public RestaurantRestController(RestaurantRepository repository, UserRepository userRepository) {
+        this.repository = repository;
+        this.userRepository = userRepository;
+    }
 
     public Restaurant get(int id) {
         log.info("get restaurant with id {}", id);

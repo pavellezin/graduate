@@ -17,8 +17,11 @@ import static pro.paullezin.graduate.util.ValidationUtil.*;
 public class RatingRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private RatingRepository repository;
+    private final RatingRepository repository;
+
+    public RatingRestController(RatingRepository repository) {
+        this.repository = repository;
+    }
 
     public Rating get(int id) {
         int userId = SecurityUtil.authUserId();
