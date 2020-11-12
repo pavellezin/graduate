@@ -35,7 +35,7 @@ public class JdbcRestaurantRepositoryTest {
     @Test
     public void delete() {
         int count = controller.getAll().size();
-        controller.delete(100003);
+        controller.delete(100004);
         Assert.assertEquals(count - 1, controller.getAll().size());
     }
 
