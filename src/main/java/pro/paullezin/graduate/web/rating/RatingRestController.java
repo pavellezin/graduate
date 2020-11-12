@@ -43,16 +43,16 @@ public class RatingRestController {
     public void update(Rating rating, int id) {
         int userId = SecurityUtil.authUserId();
         log.info("update rating {} with id={}", rating, id);
-        assureIdConsistent(rating, id);
         Assert.notNull(rating, "rating must not be null");
+        assureIdConsistent(rating, id);
         checkNotFoundWithId(repository.save(rating, userId), rating.getId());
     }
 
     public Rating create(Rating rating) {
         int userId = SecurityUtil.authUserId();
         log.info("create rating {}", rating);
-        checkNew(rating);
         Assert.notNull(rating, "rating must not be null");
+        checkNew(rating);
         return repository.save(rating, userId);
     }
 }

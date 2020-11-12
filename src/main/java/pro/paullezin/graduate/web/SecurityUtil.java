@@ -1,7 +1,6 @@
 package pro.paullezin.graduate.web;
 
 import pro.paullezin.graduate.model.AbstractBaseEntity;
-import pro.paullezin.graduate.model.Role;
 import pro.paullezin.graduate.model.User;
 
 public class SecurityUtil {

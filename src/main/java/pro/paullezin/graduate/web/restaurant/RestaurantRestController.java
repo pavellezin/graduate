@@ -2,7 +2,6 @@ package pro.paullezin.graduate.web.restaurant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import pro.paullezin.graduate.model.Restaurant;
@@ -45,20 +44,26 @@ public class RestaurantRestController {
 
     public void delete(int id) {
         log.info("delete restaurant with id {}", id);
+        int userId = SecurityUtil.authUserId();
+        assureAdmin(userRepository.get(userId));
         checkNotFoundWithId(repository.delete(id), id);
     }
 
     public void update(Restaurant restaurant, int id) {
         log.info("update restaurant {} with id={}", restaurant, id);
-        assureIdConsistent(restaurant, id);
+        int userId = SecurityUtil.authUserId();
+        assureAdmin(userRepository.get(userId));
         Assert.notNull(restaurant, "restaurant must not be null");
+        assureIdConsistent(restaurant, id);
         checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
     }
 
     public Restaurant create(Restaurant restaurant) {
         log.info("create restaurant {}", restaurant);
-        checkNew(restaurant);
+        int userId = SecurityUtil.authUserId();
+        assureAdmin(userRepository.get(userId));
         Assert.notNull(restaurant, "restaurant must not be null");
+        checkNew(restaurant);
         return repository.save(restaurant);
     }
 

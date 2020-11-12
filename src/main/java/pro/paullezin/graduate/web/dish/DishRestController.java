@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import pro.paullezin.graduate.model.Dish;
 import pro.paullezin.graduate.repository.DishRepository;
+import pro.paullezin.graduate.repository.UserRepository;
+import pro.paullezin.graduate.web.SecurityUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,8 +21,11 @@ public class DishRestController {
 
     private final DishRepository repository;
 
-    public DishRestController(DishRepository repository) {
+    private final UserRepository userRepository;
+
+    public DishRestController(DishRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     public Dish get(int id) {
@@ -35,20 +40,26 @@ public class DishRestController {
 
     public void delete(int id) {
         log.info("delete dish with id {}", id);
+        int userId = SecurityUtil.authUserId();
+        assureAdmin(userRepository.get(userId));
         checkNotFoundWithId(repository.delete(id), id);
     }
 
     public void update(Dish dish, int id) {
         log.info("update dish {} with id={}", dish, id);
-        assureIdConsistent(dish, id);
+        int userId = SecurityUtil.authUserId();
+        assureAdmin(userRepository.get(userId));
         Assert.notNull(dish, "dish must not be null");
+        assureIdConsistent(dish, id);
         checkNotFoundWithId(repository.save(dish), dish.getId());
     }
 
     public Dish create(Dish dish) {
         log.info("create dish {}", dish);
-        checkNew(dish);
+        int userId = SecurityUtil.authUserId();
+        assureAdmin(userRepository.get(userId));
         Assert.notNull(dish, "dish must not be null");
+        checkNew(dish);
         return repository.save(dish);
     }
 }
