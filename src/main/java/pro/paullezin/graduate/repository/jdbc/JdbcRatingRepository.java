@@ -60,7 +60,7 @@ public class JdbcRatingRepository implements RatingRepository {
     @Override
     @Transactional
     public boolean delete(int id, int userId) {
-        return jdbcTemplate.update("DELETE FROM dishes WHERE id=? AND user_id=?", id, userId) != 0;
+        return jdbcTemplate.update("DELETE FROM ratings WHERE id=? AND user_id=?", id, userId) != 0;
     }
 
     @Override
