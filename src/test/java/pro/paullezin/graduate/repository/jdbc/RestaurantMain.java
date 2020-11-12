@@ -1,9 +1,10 @@
-package pro.paullezin.graduate.util;
+package pro.paullezin.graduate.repository.jdbc;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pro.paullezin.graduate.model.*;
 import pro.paullezin.graduate.to.RestaurantTo;
+import pro.paullezin.graduate.util.RestaurantUtil;
 import pro.paullezin.graduate.web.dish.DishRestController;
 import pro.paullezin.graduate.web.rating.RatingRestController;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;

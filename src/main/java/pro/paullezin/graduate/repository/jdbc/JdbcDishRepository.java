@@ -5,6 +5,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -41,9 +42,15 @@ public class JdbcDishRepository implements DishRepository {
     @Transactional
     public Dish save(Dish dish) {
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(dish);
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("id", dish.getId())
+                .addValue("date", dish.getDate())
+                .addValue("description", dish.getDescription())
+                .addValue("price", dish.getPrice())
+                .addValue("restaurant_id", dish.getRestaurant().getId());
 
         if (dish.isNew()) {
-            Number newKey = insertDish.executeAndReturnKey(parameterSource);
+            Number newKey = insertDish.executeAndReturnKey(map);
             dish.setId(newKey.intValue());
         } else if (namedParameterJdbcTemplate.update(
                 "UPDATE dishes SET description=:description, price=:price" +

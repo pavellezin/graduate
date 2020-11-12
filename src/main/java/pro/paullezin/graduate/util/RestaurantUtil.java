@@ -32,7 +32,7 @@ public class RestaurantUtil {
         return filteredTos(restaurants, Restaurant::haveMenu);
     }
 
-    protected static boolean canUserVote(Restaurant restaurant){
+    public static boolean canUserVote(Restaurant restaurant){
         return DateTimeUtil.checkTimeIfUserCanVoteNow() || !restaurant.haveUserVote();
     }
 
