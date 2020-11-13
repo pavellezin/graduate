@@ -2,7 +2,7 @@ package pro.paullezin.graduate.util;
 
 import org.springframework.lang.Nullable;
 
-public class Util {
+public final class Util {
     private Util() {
     }
 

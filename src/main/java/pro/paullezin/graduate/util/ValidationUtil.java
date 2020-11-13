@@ -6,7 +6,7 @@ import pro.paullezin.graduate.util.exception.NotFoundException;
 
 import static pro.paullezin.graduate.web.SecurityUtil.authUserIsAdmin;
 
-public class ValidationUtil {
+public final class ValidationUtil {
 
     private ValidationUtil() {
     }
