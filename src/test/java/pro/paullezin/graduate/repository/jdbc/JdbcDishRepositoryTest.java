@@ -1,11 +1,11 @@
 package pro.paullezin.graduate.repository.jdbc;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pro.paullezin.graduate.model.Dish;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.web.dish.DishRestController;
@@ -14,22 +14,14 @@ import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
 public class JdbcDishRepositoryTest {
-    private static ConfigurableApplicationContext appCtx;
-    private static DishRestController controller;
-    private static RestaurantRestController restoController;
 
-    @BeforeClass
-    public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        controller = appCtx.getBean(DishRestController.class);
-        restoController = appCtx.getBean(RestaurantRestController.class);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        appCtx.close();
-    }
+    @Autowired
+    private DishRestController controller;
+    @Autowired
+    private RestaurantRestController restoController;
 
     @Test
     public void save() {

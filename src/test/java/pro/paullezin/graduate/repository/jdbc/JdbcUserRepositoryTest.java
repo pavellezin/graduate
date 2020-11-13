@@ -1,30 +1,22 @@
 package pro.paullezin.graduate.repository.jdbc;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.util.exception.NotFoundException;
 import pro.paullezin.graduate.web.SecurityUtil;
 import pro.paullezin.graduate.web.user.AdminRestController;
 
-public class JdbcUserRepositoryTest{
-    private static ConfigurableApplicationContext appCtx;
-    private static AdminRestController controller;
+@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+public class JdbcUserRepositoryTest {
 
-    @BeforeClass
-    public static void beforeClass(){
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        controller = appCtx.getBean(AdminRestController.class);
-    }
-
-    @AfterClass
-    public static void afterClass(){
-        appCtx.close();
-    }
+    @Autowired
+    private AdminRestController controller;
 
     @Test
     public void save() {
@@ -61,7 +53,7 @@ public class JdbcUserRepositoryTest{
     }
 
     @Test(expected = NotFoundException.class)
-    public void getByEmailNotFound() throws Exception{
+    public void getByEmailNotFound() throws Exception {
         controller.getByMail("user100@paullezin.pro");
     }
 

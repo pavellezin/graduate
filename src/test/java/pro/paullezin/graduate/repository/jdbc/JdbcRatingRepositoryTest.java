@@ -1,11 +1,11 @@
 package pro.paullezin.graduate.repository.jdbc;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pro.paullezin.graduate.model.Rating;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.model.User;
@@ -15,24 +15,16 @@ import pro.paullezin.graduate.web.user.AdminRestController;
 
 import java.time.LocalDate;
 
+@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
 public class JdbcRatingRepositoryTest {
-    private static ConfigurableApplicationContext appCtx;
-    private static RatingRestController controller;
-    private static RestaurantRestController restoController;
-    private static AdminRestController userController;
 
-    @BeforeClass
-    public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        controller = appCtx.getBean(RatingRestController.class);
-        restoController = appCtx.getBean(RestaurantRestController.class);
-        userController = appCtx.getBean(AdminRestController.class);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        appCtx.close();
-    }
+    @Autowired
+    private RatingRestController controller;
+    @Autowired
+    private RestaurantRestController restoController;
+    @Autowired
+    private AdminRestController userController;
 
     @Test
     public void save() {

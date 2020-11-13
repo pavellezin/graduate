@@ -1,29 +1,21 @@
 package pro.paullezin.graduate.repository.jdbc;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.util.exception.NotFoundException;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 
+@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
 public class JdbcRestaurantRepositoryTest {
-    private static ConfigurableApplicationContext appCtx;
-    private static RestaurantRestController controller;
 
-    @BeforeClass
-    public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        controller = appCtx.getBean(RestaurantRestController.class);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        appCtx.close();
-    }
+    @Autowired
+    private RestaurantRestController controller;
 
     @Test
     public void save() {
