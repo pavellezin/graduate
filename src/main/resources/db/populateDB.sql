@@ -11,7 +11,9 @@ INSERT INTO users (name, email, password) VALUES
 
 INSERT INTO user_roles (role, user_id) VALUES
 ('USER', 100000),
-('ADMIN', 100001);
+('ADMIN', 100001),
+('ADMIN', 100002),
+('USER', 100002);
 
 INSERT INTO restaurants (name, address, web) VALUES
 ('Basilio','Entuziastov str','basilio.ru'),
