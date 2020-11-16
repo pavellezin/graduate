@@ -21,6 +21,10 @@
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.30</slf4j.version>
+
+        <!-- Hibernate -->
+        <hibernate.version>5.4.12.Final</hibernate.version>
+        <hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
     </properties>
 
     <build>
@@ -40,7 +44,6 @@
     </build>
 
     <dependencies>
-        <!-- Logging with SLF4J & LogBack -->
         <!-- Logging with SLF4J & LogBack -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -72,6 +75,18 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!--- ORM -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
         </dependency>
 
         <!--Web-->
