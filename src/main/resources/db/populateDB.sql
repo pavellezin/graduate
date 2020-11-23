@@ -19,17 +19,20 @@ INSERT INTO restaurants (name, address, web) VALUES
 ('Basilio','Entuziastov str','basilio.ru'),
 ('Vegan','Blinnaya str','vegan.ru');
 
-INSERT INTO dishes (date, description, price, restaurant_id) VALUES
-('2020-11-08','Salat',10.00, 100003),
-('2020-11-10','Salat',12.00, 100003),
-('2020-11-10','Soup',15.00, 100003),
-('2020-11-10','Desert',7.00, 100003);
+INSERT INTO dishes (description, price, restaurant_id) VALUES
+('Salat',10.00, 100004),
+('Salat',12.00, 100003),
+('Soup',15.00, 100003),
+('Desert',7.00, 100003);
 
 INSERT INTO ratings (date, vote, user_id, restaurant_id) VALUES
-('2020-11-09', 5, 100001, 100003),
-('2020-11-09', 4, 100002, 100003),
-('2020-11-09', 4, 100000, 100003),
-('2020-11-10', 4, 100000, 100003),
-('2020-11-09', 5, 100001, 100004),
-('2020-11-09', 4, 100002, 100004),
-('2020-11-10', 5, 100001, 100004);
+('2020-11-10',3, 100000, 100003),
+('2020-11-10',5, 100000, 100004),
+('2020-11-11',5, 100000, 100004);
+
+INSERT INTO ratings (vote, user_id, restaurant_id) VALUES
+(5, 100000, 100004),
+(5, 100001, 100003),
+(3, 100001, 100004),
+(5, 100002, 100003),
+(4, 100002, 100004);

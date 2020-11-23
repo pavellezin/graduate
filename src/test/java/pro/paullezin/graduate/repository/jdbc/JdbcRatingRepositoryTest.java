@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pro.paullezin.graduate.model.Rating;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.model.User;
+import pro.paullezin.graduate.web.SecurityUtil;
 import pro.paullezin.graduate.web.rating.RatingRestController;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 import pro.paullezin.graduate.web.user.AdminRestController;
@@ -28,7 +29,7 @@ public class JdbcRatingRepositoryTest {
 
     @Test
     public void save() {
-        User user = userController.getByMail("admin@paullezin.pro");
+        User user = userController.get(SecurityUtil.authUserId());
         Restaurant restaurant = restoController.get(100003);
         Rating rating = new Rating(null, restaurant, user, LocalDate.now(), 5);
         controller.create(rating);
@@ -42,12 +43,12 @@ public class JdbcRatingRepositoryTest {
     @Test
     public void get() {
         Rating rating = controller.get(100012);
-        Assert.assertEquals(Integer.valueOf(4), rating.getVote());
+        Assert.assertEquals(Integer.valueOf(5), rating.getVote());
     }
 
     @Test
     public void getAverageVote() {
-        Assert.assertEquals(Double.valueOf(4.5),
-                controller.getAverageVote(100004, LocalDate.of(2020, 11, 9)));
+        Assert.assertEquals(Double.valueOf(4),
+                controller.getAverageVote(100004, LocalDate.now()));
     }
 }

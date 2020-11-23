@@ -34,8 +34,9 @@ public class JdbcDishRepositoryTest {
 
     @Test
     public void delete() {
+        Assert.assertEquals(1, controller.getAll(100004, LocalDate.now()).size());
         controller.delete(100005);
-        Assert.assertEquals(0, controller.getAll(100003, LocalDate.of(2020, 11, 8)).size());
+        Assert.assertEquals(0, controller.getAll(100004, LocalDate.now()).size());
     }
 
     @Test
@@ -46,6 +47,6 @@ public class JdbcDishRepositoryTest {
 
     @Test
     public void getAll() {
-        Assert.assertEquals(3, controller.getAll(100003, LocalDate.of(2020, 11, 10)).size());
+        Assert.assertEquals(3, controller.getAll(100003, LocalDate.now()).size());
     }
 }
