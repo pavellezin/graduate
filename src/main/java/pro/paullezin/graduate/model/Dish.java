@@ -1,8 +1,14 @@
 package pro.paullezin.graduate.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "dishes")
 public class Dish extends AbstractBaseEntity {
     private LocalDate date = LocalDate.now();
 
@@ -10,6 +16,9 @@ public class Dish extends AbstractBaseEntity {
 
     private BigDecimal price;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
     public Dish() {

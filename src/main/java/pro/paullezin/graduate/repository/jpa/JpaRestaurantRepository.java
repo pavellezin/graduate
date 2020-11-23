@@ -29,9 +29,7 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public Restaurant get(int id) {
-        return null;
-    }
+    public Restaurant get(int id) {return em.find(Restaurant.class, id);}
 
     @Override
     public List<Restaurant> getAll() {

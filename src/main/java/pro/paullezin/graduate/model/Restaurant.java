@@ -1,17 +1,38 @@
 package pro.paullezin.graduate.model;
 
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Where;
+import org.hibernate.validator.constraints.URL;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
+@Entity
+@Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "web", name = "restaurants_unique_web_idx")})
 public class Restaurant extends AbstractNamedEntity {
 
+    @Column(name = "address", nullable = false)
+    @NotBlank
+    @Size(max = 200)
     private String address;
 
+    @Column(name = "web", nullable = false, unique = true)
+    @URL
+    @NotBlank
+    @Size(max = 500)
     private String web;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @Where(clause = "date = now()")
     private List<Dish> menu;
 
+    @Formula("(SELECT AVG(Cast(r.vote as DOUBLE)) FROM ratings r WHERE r.restaurant_id=id)")
+    @Where(clause = "date = now()")
     private Double rating;
 
+    @Transient
     private Integer userRating;
 
     public Restaurant() {

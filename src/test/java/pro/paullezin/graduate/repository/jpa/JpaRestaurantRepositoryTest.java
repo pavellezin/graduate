@@ -20,8 +20,8 @@ public class JpaRestaurantRepositoryTest {
 
     @Test
     public void get() {
-//        Restaurant restaurant = controller.get(100003);
-//        log.info("get restaurant = {}",restaurant);
-        return;
+        Restaurant restaurant = controller.get(100003);
+        log.info("get restaurant = {}",restaurant);
     }
+
 }
