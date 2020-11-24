@@ -3,6 +3,7 @@ package pro.paullezin.graduate.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,9 +12,20 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@NamedQueries({
+        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
+        @NamedQuery(name = Dish.ALL, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId AND d.date=:date"),
+})
 @Entity
 @Table(name = "dishes")
 public class Dish extends AbstractBaseEntity {
+
+    public static final String DELETE = "Dish.delete";
+    public static final String ALL = "Dish.getAll";
+
+    @Column(name = "date", nullable = false)
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date = LocalDate.now();
 
     @Column(name = "description", nullable = false)

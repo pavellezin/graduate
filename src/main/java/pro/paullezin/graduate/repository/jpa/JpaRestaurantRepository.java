@@ -3,7 +3,6 @@ package pro.paullezin.graduate.repository.jpa;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pro.paullezin.graduate.model.Restaurant;
-import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
@@ -31,11 +30,15 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     @Override
     @Transactional
     public boolean delete(int id) {
-        return false;
+        return em.createNamedQuery(Restaurant.DELETE)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
     }
 
     @Override
-    public Restaurant get(int id) {return em.find(Restaurant.class, id);}
+    public Restaurant get(int id) {
+        return em.find(Restaurant.class, id);
+    }
 
     @Override
     public List<Restaurant> getAll() {

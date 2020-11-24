@@ -27,7 +27,6 @@ public class VoteService {
         {
             final Rating vote = ratingRepository.getVoteForUserAndRestaurant(r.getId(), userId, LocalDate.now());
             if (vote!=null) r.setUserRating(vote.getVote());
-//            r.setUserRating(ratingRepository.getVoteForUserAndRestaurant(r.getId(), userId, LocalDate.now()).getVote());
             restaurantRepository.save(r);
         });
     }

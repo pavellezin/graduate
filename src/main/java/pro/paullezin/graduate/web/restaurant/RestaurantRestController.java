@@ -45,7 +45,6 @@ public class RestaurantRestController {
         log.info("getAll restaurants for user {}", userId);
         List<Restaurant> restaurants = repository.getAll();
         voteService.setUserVoteToRestaurant(restaurants);
-        log.info("getAll restaurants {}", restaurants);
         return authUserIsAdmin(userRepository.get(userId)) ? getAdminTos(restaurants) : getUserTos(restaurants);
     }
 

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 @NamedQueries({
         @NamedQuery(name = Rating.DELETE, query = "DELETE FROM Rating r WHERE r.id=:id AND r.user.id=:userId"),
+        @NamedQuery(name = Rating.GET_AVERAGE_VOTE, query = "SELECT AVG(r.vote) FROM Rating r WHERE r.restaurant.id=:restaurantId AND r.date=:date"),
         @NamedQuery(name = Rating.GET_CURRENT_USER_RATING_FOR_RESTAURANT,
                 query = "SELECT r FROM Rating r WHERE r.user.id=:userId AND r.restaurant.id=:restaurantId AND r.date=:date"),
 })
@@ -25,6 +26,7 @@ public class Rating extends AbstractBaseEntity {
 
     public static final String GET_CURRENT_USER_RATING_FOR_RESTAURANT = "Rating.getCurrent";
     public static final String DELETE = "Rating.delete";
+    public static final String GET_AVERAGE_VOTE = "Rating.average";
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)

@@ -5,10 +5,12 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pro.paullezin.graduate.model.Rating;
+import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.repository.RatingRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,23 +24,37 @@ public class JpaRatingRepository implements RatingRepository {
     @Override
     @Transactional
     public Rating save(Rating rating, int userId) {
-        return null;
+        rating.setUser(em.getReference(User.class, userId));
+        if (rating.isNew()) {
+            em.persist(rating);
+            return rating;
+        } else if (get(rating.getId(), userId) == null) {
+            return null;
+        }
+        return em.merge(rating);
     }
 
     @Override
     @Transactional
     public boolean delete(int id, int userId) {
-        return false;
+        return em.createNamedQuery(Rating.DELETE)
+                .setParameter("id", id)
+                .setParameter("userId", userId)
+                .executeUpdate() != 0;
     }
 
     @Override
     public Rating get(int id, int userId) {
-        return null;
+        Rating rating = em.find(Rating.class, id);
+        return rating != null && rating.getUser().getId() == userId ? rating : null;
     }
 
     @Override
     public Double getAverageVote(int restaurantId, LocalDate date) {
-        return null;
+        Query query = em.createNamedQuery(Rating.GET_AVERAGE_VOTE)
+                .setParameter("restaurantId", restaurantId)
+                .setParameter("date", date);
+        return (Double) query.getSingleResult();
     }
 
     @Override
