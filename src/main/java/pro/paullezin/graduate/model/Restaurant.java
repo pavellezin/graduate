@@ -9,9 +9,17 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r ORDER BY r.name"),
+})
+
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "web", name = "restaurants_unique_web_idx")})
 public class Restaurant extends AbstractNamedEntity {
+
+    public static final String ALL_SORTED = "Restaurant.getAllSorted";
+    public static final String DELETE = "Restaurant.delete";
 
     @Column(name = "address", nullable = false)
     @NotBlank
@@ -25,11 +33,11 @@ public class Restaurant extends AbstractNamedEntity {
     private String web;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
-    @Where(clause = "date = now()")
+    @Where(clause = "date = current_date")
     private List<Dish> menu;
 
     @Formula("(SELECT AVG(Cast(r.vote as DOUBLE)) FROM ratings r WHERE r.restaurant_id=id)")
-    @Where(clause = "date = now()")
+    @Where(clause = "date = current_date")
     private Double rating;
 
     @Transient
@@ -87,15 +95,21 @@ public class Restaurant extends AbstractNamedEntity {
         this.rating = rating;
     }
 
-    public Integer getUserRating() { return userRating; }
+    public Integer getUserRating() {
+        return userRating;
+    }
 
-    public void setUserRating(Integer userRating) { this.userRating = userRating; }
+    public void setUserRating(Integer userRating) {
+        this.userRating = userRating;
+    }
 
     public boolean haveMenu() {
         return this.menu != null && !this.menu.isEmpty();
     }
 
-    public boolean haveUserVote() {return this.userRating != null; }
+    public boolean haveUserVote() {
+        return this.userRating != null;
+    }
 
     @Override
     public String toString() {
@@ -105,6 +119,7 @@ public class Restaurant extends AbstractNamedEntity {
                 ", address='" + address + '\'' +
                 ", web='" + web + '\'' +
                 ", rating=" + rating +
+                ", userRating=" + userRating +
                 '}';
     }
 

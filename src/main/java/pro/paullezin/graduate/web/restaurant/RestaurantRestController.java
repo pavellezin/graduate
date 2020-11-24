@@ -2,11 +2,13 @@ package pro.paullezin.graduate.web.restaurant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.repository.RestaurantRepository;
 import pro.paullezin.graduate.repository.UserRepository;
+import pro.paullezin.graduate.service.VoteService;
 import pro.paullezin.graduate.to.RestaurantTo;
 import pro.paullezin.graduate.web.SecurityUtil;
 
@@ -25,9 +27,12 @@ public class RestaurantRestController {
 
     private final UserRepository userRepository;
 
-    public RestaurantRestController(RestaurantRepository repository, UserRepository userRepository) {
+    private final VoteService voteService;
+
+    public RestaurantRestController(RestaurantRepository repository, UserRepository userRepository, VoteService voteService) {
         this.repository = repository;
         this.userRepository = userRepository;
+        this.voteService = voteService;
     }
 
     public Restaurant get(int id) {
@@ -39,6 +44,8 @@ public class RestaurantRestController {
         int userId = SecurityUtil.authUserId();
         log.info("getAll restaurants for user {}", userId);
         List<Restaurant> restaurants = repository.getAll();
+        voteService.setUserVoteToRestaurant(restaurants);
+        log.info("getAll restaurants {}", restaurants);
         return authUserIsAdmin(userRepository.get(userId)) ? getAdminTos(restaurants) : getUserTos(restaurants);
     }
 

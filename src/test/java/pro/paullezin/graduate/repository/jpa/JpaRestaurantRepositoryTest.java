@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pro.paullezin.graduate.model.Restaurant;
+import pro.paullezin.graduate.to.RestaurantTo;
 import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
+
+import java.util.List;
 
 @ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-jpa.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,4 +27,9 @@ public class JpaRestaurantRepositoryTest {
         log.info("get restaurant = {}",restaurant);
     }
 
+    @Test
+    public void getAll() {
+        final List<RestaurantTo> all = controller.getAll();
+        log.info("get all Tos = {}",all);
+    }
 }

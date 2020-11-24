@@ -10,8 +10,9 @@ INSERT INTO users (name, email, password) VALUES
 ('admin', 'admin@paullezin.pro', 'admin');
 
 INSERT INTO user_roles (role, user_id) VALUES
+('ADMIN', 100000),
 ('USER', 100000),
-('ADMIN', 100001),
+('USER', 100001),
 ('ADMIN', 100002),
 ('USER', 100002);
 

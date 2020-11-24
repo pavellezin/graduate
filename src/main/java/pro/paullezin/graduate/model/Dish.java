@@ -2,8 +2,12 @@ package pro.paullezin.graduate.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -12,8 +16,14 @@ import java.time.LocalDate;
 public class Dish extends AbstractBaseEntity {
     private LocalDate date = LocalDate.now();
 
+    @Column(name = "description", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 120)
     private String description;
 
+    @Column(name = "price", nullable = false)
+    @NotNull
+    @Range(min = 0, max = 500)
     private BigDecimal price;
 
     @ManyToOne

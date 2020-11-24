@@ -1,7 +1,21 @@
 package pro.paullezin.graduate.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@NamedQueries({
+        @NamedQuery(name = Rating.DELETE, query = "DELETE FROM Rating r WHERE r.id=:id AND r.user.id=:userId"),
+        @NamedQuery(name = Rating.GET_CURRENT_USER_RATING_FOR_RESTAURANT,
+                query = "SELECT r FROM Rating r WHERE r.user.id=:userId AND r.restaurant.id=:restaurantId AND r.date=:date"),
+})
+
+@Entity
+@Table(name = "ratings")
 public class Rating extends AbstractBaseEntity {
     public static final Integer ONE_STAR = 1;
     public static final Integer TWO_STARS = 2;
@@ -9,12 +23,25 @@ public class Rating extends AbstractBaseEntity {
     public static final Integer FOUR_STARS = 4;
     public static final Integer FIVE_STARS = 5;
 
+    public static final String GET_CURRENT_USER_RATING_FOR_RESTAURANT = "Rating.getCurrent";
+    public static final String DELETE = "Rating.delete";
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "date", nullable = false, columnDefinition = "timestamp default current_date")
+    @NotNull
     private LocalDate date;
 
+    @Column(name = "vote", nullable = false)
+    @NotNull
+    @Range(min = 1, max = 5)
     private Integer vote;
 
     public Rating() {

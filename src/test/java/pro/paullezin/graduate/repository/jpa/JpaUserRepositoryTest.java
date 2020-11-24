@@ -54,7 +54,7 @@ public class JpaUserRepositoryTest {
 
     @Test
     public void getByEmail() {
-        User user = controller.getByMail("user1@paullezin.pro");
+        User user = controller.getByMail("user2@paullezin.pro");
         USER_MATCHER.assertMatch(user, USER);
     }
 

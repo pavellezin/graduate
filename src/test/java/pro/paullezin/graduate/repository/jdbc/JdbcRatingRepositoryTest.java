@@ -51,4 +51,11 @@ public class JdbcRatingRepositoryTest {
         Assert.assertEquals(Double.valueOf(4),
                 controller.getAverageVote(100004, LocalDate.now()));
     }
+
+    @Test
+    public void getVoteForUserAndRestaurant() {
+        Restaurant restaurant = restoController.get(100003);
+        Rating vote = controller.getVoteForUserAndRestaurant(restaurant, SecurityUtil.authUserId() + 1);
+        Assert.assertEquals(Integer.valueOf(5), vote.getVote());
+    }
 }

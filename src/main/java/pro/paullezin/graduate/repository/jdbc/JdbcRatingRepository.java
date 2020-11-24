@@ -73,4 +73,10 @@ public class JdbcRatingRepository implements RatingRepository {
     public Double getAverageVote(int restaurantId, LocalDate date) {
         return jdbcTemplate.queryForObject("SELECT AVG(Cast(vote as DOUBLE)) FROM ratings WHERE restaurant_id=? AND date=?", Double.class, restaurantId, date);
     }
+
+    @Override
+    public Rating getVoteForUserAndRestaurant(int restaurantId, int userId, LocalDate date) {
+        List<Rating> ratings = jdbcTemplate.query("SELECT vote FROM ratings WHERE restaurant_id=? AND date=? AND user_id=?", ROW_MAPPER, restaurantId, date, userId);
+        return DataAccessUtils.singleResult(ratings);
+    }
 }

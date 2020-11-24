@@ -3,6 +3,7 @@ package pro.paullezin.graduate.repository.jpa;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pro.paullezin.graduate.model.Restaurant;
+import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
@@ -19,7 +20,12 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     @Override
     @Transactional
     public Restaurant save(Restaurant restaurant) {
-        return null;
+        if (restaurant.isNew()) {
+            em.persist(restaurant);
+            return restaurant;
+        } else {
+            return em.merge(restaurant);
+        }
     }
 
     @Override
@@ -33,6 +39,6 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-        return null;
+        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
     }
 }
