@@ -59,7 +59,7 @@ public class JpaRatingRepository implements RatingRepository {
 
     @Override
     public Rating getVoteForUserAndRestaurant(int restaurantId, int userId, LocalDate date) {
-        List<Rating> ratings = em.createNamedQuery(Rating.GET_CURRENT_USER_RATING_FOR_RESTAURANT)
+        List<Rating> ratings = em.createNamedQuery(Rating.GET_CURRENT_USER_RATING_FOR_RESTAURANT, Rating.class)
                 .setParameter("restaurantId", restaurantId)
                 .setParameter("userId", userId)
                 .setParameter("date", date)
