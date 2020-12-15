@@ -46,18 +46,18 @@ public class DishRestController {
 
     public void update(Dish dish, int id) {
         log.info("update dish {} with id={}", dish, id);
+        Assert.notNull(dish, "dish must not be null");
         int userId = SecurityUtil.authUserId();
         assureAdmin(userRepository.get(userId));
-        Assert.notNull(dish, "dish must not be null");
         assureIdConsistent(dish, id);
         checkNotFoundWithId(repository.save(dish), dish.getId());
     }
 
     public Dish create(Dish dish) {
         log.info("create dish {}", dish);
+        Assert.notNull(dish, "dish must not be null");
         int userId = SecurityUtil.authUserId();
         assureAdmin(userRepository.get(userId));
-        Assert.notNull(dish, "dish must not be null");
         checkNew(dish);
         return repository.save(dish);
     }
