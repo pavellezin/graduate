@@ -14,11 +14,8 @@ import java.util.List;
 public class VoteService {
     private final RatingRepository ratingRepository;
 
-    private final RestaurantRepository restaurantRepository;
-
-    public VoteService(RatingRepository ratingRepository, RestaurantRepository restaurantRepository) {
+    public VoteService(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
-        this.restaurantRepository = restaurantRepository;
     }
 
     public void setUserVoteToRestaurant(List<Restaurant> restaurants) {
@@ -26,8 +23,7 @@ public class VoteService {
         restaurants.forEach(r ->
         {
             final Rating vote = ratingRepository.getVoteForUserAndRestaurant(r.getId(), userId, LocalDate.now());
-            if (vote!=null) r.setUserRating(vote.getVote());
-            restaurantRepository.save(r);
+            if (vote != null) r.setUserRating(vote.getVote());
         });
     }
 
