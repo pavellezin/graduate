@@ -1,6 +1,7 @@
 package pro.paullezin.graduate.repository.datajpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,6 +12,11 @@ import java.time.LocalDate;
 
 @Transactional(readOnly = true)
 public interface CrudRatingRepository extends JpaRepository<Rating, Integer> {
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Rating r WHERE r.id=:id AND r.user.id=:userId")
+    int delete(@Param("id") int id, @Param("userId") int userId);
 
     @Query("SELECT r FROM Rating r WHERE r.user.id=:userId AND r.restaurant.id =:restaurantId AND r.date=:currentDate")
     Rating getVoteForUserAndRestaurant(@Param("restaurantId") int restaurantId, @Param("userId") int usertId, @Param("currentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate currentDate);

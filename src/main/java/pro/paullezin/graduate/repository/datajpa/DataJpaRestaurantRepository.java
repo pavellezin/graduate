@@ -8,6 +8,13 @@ import java.util.List;
 
 @Repository
 public class DataJpaRestaurantRepository implements RestaurantRepository {
+
+    private final CrudRestaurantRepository crudRepository;
+
+    public DataJpaRestaurantRepository(CrudRestaurantRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
+
     @Override
     public Restaurant save(Restaurant restaurant) {
         return null;
@@ -20,7 +27,7 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public Restaurant get(int id) {
-        return null;
+        return crudRepository.findById(id).orElse(null);
     }
 
     @Override
