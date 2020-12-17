@@ -5,11 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import pro.paullezin.graduate.model.Rating;
-import pro.paullezin.graduate.model.Restaurant;
-import pro.paullezin.graduate.model.User;
 import pro.paullezin.graduate.repository.RatingRepository;
 import pro.paullezin.graduate.web.SecurityUtil;
-import pro.paullezin.graduate.web.user.AdminRestController;
 
 import java.time.LocalDate;
 
@@ -36,11 +33,9 @@ public class RatingRestController {
         return repository.getAverageVote(restaurantId, date);
     }
 
-    public Rating getVoteForUserAndRestaurant(Restaurant restaurant, int userId) {
-        log.info("get rating for restaurant {} and user {}", restaurant.getId(), userId);
-        Assert.notNull(restaurant, "restaurant must not be null");
-        Rating voteForUserAndRestaurant = repository.getVoteForUserAndRestaurant(restaurant.getId(), userId, LocalDate.now());
-        return voteForUserAndRestaurant;
+    public Rating getVoteForUserAndRestaurant(int restaurantId, int userId) {
+        log.info("get rating for restaurant {} and user {}", restaurantId, userId);
+        return repository.getVoteForUserAndRestaurant(restaurantId, userId, LocalDate.now());
     }
 
     public void delete(int id) {
