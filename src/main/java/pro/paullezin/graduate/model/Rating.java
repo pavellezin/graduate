@@ -28,12 +28,12 @@ public class Rating extends AbstractBaseEntity {
     public static final String DELETE = "Rating.delete";
     public static final String GET_AVERAGE_VOTE = "Rating.average";
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

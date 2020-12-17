@@ -1,5 +1,6 @@
 package pro.paullezin.graduate.repository.datajpa;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import pro.paullezin.graduate.model.Restaurant;
 import pro.paullezin.graduate.repository.RestaurantRepository;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Repository
 public class DataJpaRestaurantRepository implements RestaurantRepository {
+    private static final Sort SORT_NAME = Sort.by(Sort.Direction.ASC, "name");
 
     private final CrudRestaurantRepository crudRepository;
 
@@ -17,12 +19,12 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public Restaurant save(Restaurant restaurant) {
-        return null;
+        return crudRepository.save(restaurant);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return crudRepository.delete(id) != 0;
     }
 
     @Override
@@ -32,6 +34,6 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-        return null;
+        return crudRepository.findAll(SORT_NAME);
     }
 }

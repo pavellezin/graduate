@@ -22,8 +22,8 @@ public class VoteService {
         int userId = SecurityUtil.authUserId();
         restaurants.forEach(r ->
         {
-            final Rating vote = ratingRepository.getVoteForUserAndRestaurant(r.getId(), userId, LocalDate.now());
-            if (vote != null) r.setUserRating(vote.getVote());
+            final Rating rating = ratingRepository.getVoteForUserAndRestaurant(r.getId(), userId, LocalDate.now());
+            if (rating != null) r.setUserRating(rating.getVote());
         });
     }
 
