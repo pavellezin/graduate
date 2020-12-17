@@ -9,23 +9,29 @@ import java.util.List;
 
 @Repository
 public class DataJpaDishRepository implements DishRepository {
+    private final CrudDishRepository crudRepository;
+
+    public DataJpaDishRepository(CrudDishRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
+
     @Override
     public Dish save(Dish dish) {
-        return null;
+        return crudRepository.save(dish);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return crudRepository.delete(id) != 0;
     }
 
     @Override
     public Dish get(int id) {
-        return null;
+        return crudRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Dish> getAll(int restaurantId, LocalDate date) {
-        return null;
+    public List<Dish> getAll(int restaurantId, LocalDate currentDate) {
+        return crudRepository.getAll(restaurantId, currentDate);
     }
 }

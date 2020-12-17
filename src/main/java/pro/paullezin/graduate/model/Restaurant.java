@@ -50,6 +50,12 @@ public class Restaurant extends AbstractNamedEntity {
         this(r.getId(), r.getName(), r.getAddress(), r.getWeb());
     }
 
+    public Restaurant(String name, String address, String web) {
+        super(null, name);
+        this.address = address;
+        this.web = web;
+    }
+
     public Restaurant(Integer id, String name, String address, String web) {
         super(id, name);
         this.address = address;
