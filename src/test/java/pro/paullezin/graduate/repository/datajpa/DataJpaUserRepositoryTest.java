@@ -15,7 +15,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static pro.paullezin.graduate.UserTestData.*;
 
-@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-datajpa.xml"})
+@ContextConfiguration(locations = {
+        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-mvc.xml",
+        "classpath:spring/spring-datajpa.xml"
+})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DataJpaUserRepositoryTest {
 

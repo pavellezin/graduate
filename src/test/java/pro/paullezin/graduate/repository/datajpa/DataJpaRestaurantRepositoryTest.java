@@ -13,7 +13,11 @@ import pro.paullezin.graduate.web.restaurant.RestaurantRestController;
 
 import java.util.List;
 
-@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-datajpa.xml"})
+@ContextConfiguration(locations = {
+        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-mvc.xml",
+        "classpath:spring/spring-datajpa.xml"
+})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DataJpaRestaurantRepositoryTest {
 

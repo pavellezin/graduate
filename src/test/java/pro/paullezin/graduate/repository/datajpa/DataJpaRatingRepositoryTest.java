@@ -20,7 +20,11 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-datajpa.xml"})
+@ContextConfiguration(locations = {
+        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-mvc.xml",
+        "classpath:spring/spring-datajpa.xml"
+})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DataJpaRatingRepositoryTest {
 
