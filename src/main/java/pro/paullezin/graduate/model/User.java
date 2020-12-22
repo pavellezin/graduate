@@ -1,5 +1,6 @@
 package pro.paullezin.graduate.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -41,6 +42,7 @@ public class User extends AbstractNamedEntity {
 
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date registered = new Date();
 
     @Enumerated(EnumType.STRING)

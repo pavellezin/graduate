@@ -1,5 +1,7 @@
 package pro.paullezin.graduate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -27,6 +29,7 @@ public abstract class AbstractBaseEntity {
         return id;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return this.id == null;
     }
