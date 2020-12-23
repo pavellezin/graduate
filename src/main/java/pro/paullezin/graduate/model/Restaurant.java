@@ -36,8 +36,7 @@ public class Restaurant extends AbstractNamedEntity {
     @Where(clause = "date = current_date")
     private List<Dish> menu;
 
-    @Formula("(SELECT AVG(Cast(r.vote as DOUBLE)) FROM ratings r WHERE r.restaurant_id=id)")
-    @Where(clause = "date = current_date")
+    @Formula("(SELECT AVG(Cast(r.vote as DOUBLE)) FROM ratings r WHERE r.restaurant_id=id AND r.date=current_date)")
     private Double rating;
 
     @Transient

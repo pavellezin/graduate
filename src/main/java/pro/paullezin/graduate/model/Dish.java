@@ -27,6 +27,7 @@ public class Dish extends AbstractBaseEntity {
     @Column(name = "date", nullable = false)
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonIgnore
     private LocalDate date = LocalDate.now();
 
     @Column(name = "description", nullable = false)
@@ -62,6 +63,10 @@ public class Dish extends AbstractBaseEntity {
 
     public Dish(LocalDate dateTime, Restaurant restaurant, String description, BigDecimal price) {
         this(null, dateTime, restaurant, description, price);
+    }
+
+    public Dish(String description, BigDecimal price) {
+        this(null, LocalDate.now(), null, description, price);
     }
 
     public LocalDate getDate() {

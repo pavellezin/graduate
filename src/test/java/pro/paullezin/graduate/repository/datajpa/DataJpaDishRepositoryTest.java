@@ -32,14 +32,14 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void saveAndDelete() {
-        assertEquals(3, controller.getAll(100003, LocalDate.now()).size());
+        assertEquals(3, controller.getAll(100003).size());
         Restaurant restaurant = restoController.get(100003);
         Dish newDish = new Dish(LocalDate.now(), restaurant, "New Dish", BigDecimal.valueOf(5.5));
-        Dish dish = controller.create(newDish);
+        Dish dish = controller.create(newDish, 100003);
         Assert.assertEquals(newDish, dish);
-        assertEquals(4, controller.getAll(100003, LocalDate.now()).size());
+        assertEquals(4, controller.getAll(100003).size());
         controller.delete(dish.getId());
-        assertEquals(3, controller.getAll(100003, LocalDate.now()).size());
+        assertEquals(3, controller.getAll(100003).size());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void getAll() {
-        final List<Dish> dishes = controller.getAll(100003, LocalDate.now());
+        final List<Dish> dishes = controller.getAll(100003);
         Assert.assertEquals(3, dishes.size());
     }
 }
