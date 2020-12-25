@@ -43,6 +43,7 @@ public class DishRestController {
     public List<Dish> getAll(@PathVariable int restaurantId) {
         LocalDate date = LocalDate.now();
         log.info("getAll dishes for restaurant {} for date {}", restaurantId, date);
+        checkNotFound(restaurantRepository.get(restaurantId), "id=" + restaurantId);
         return repository.getAll(restaurantId, date);
     }
 

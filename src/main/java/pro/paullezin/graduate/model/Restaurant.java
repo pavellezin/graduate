@@ -34,6 +34,7 @@ public class Restaurant extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     @Where(clause = "date = current_date")
+    @OrderBy("id ASC ")
     private List<Dish> menu;
 
     @Formula("(SELECT AVG(Cast(r.vote as DOUBLE)) FROM ratings r WHERE r.restaurant_id=id AND r.date=current_date)")
