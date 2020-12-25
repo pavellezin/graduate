@@ -8,8 +8,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pro.paullezin.graduate.model.Dish;
 import pro.paullezin.graduate.repository.DishRepository;
+import pro.paullezin.graduate.repository.RestaurantRepository;
 import pro.paullezin.graduate.repository.UserRepository;
-import pro.paullezin.graduate.repository.datajpa.CrudRestaurantRepository;
 import pro.paullezin.graduate.web.SecurityUtil;
 
 import javax.validation.Valid;
@@ -24,10 +24,10 @@ public class DishRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private final DishRepository repository;
-    private final CrudRestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
 
-    public DishRestController(DishRepository repository, CrudRestaurantRepository restaurantRepository, UserRepository userRepository) {
+    public DishRestController(DishRepository repository, RestaurantRepository restaurantRepository, UserRepository userRepository) {
         this.repository = repository;
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
@@ -62,8 +62,10 @@ public class DishRestController {
         Assert.notNull(dish, "dish must not be null");
         int userId = SecurityUtil.authUserId();
         assureAdmin(userRepository.get(userId));
-        assureIdConsistent(dish, id);
-        checkNotFoundWithId(repository.save(dish), dish.getId());
+        Dish actualDish = checkNotFoundWithId(repository.get(id), id);
+        actualDish.setDescription(dish.getDescription());
+        actualDish.setPrice(dish.getPrice());
+        repository.save(actualDish);
     }
 
     @PutMapping(value = "/restaurants/{restaurantId}/dishes", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -74,7 +76,7 @@ public class DishRestController {
         int userId = SecurityUtil.authUserId();
         assureAdmin(userRepository.get(userId));
         checkNew(dish);
-        dish.setRestaurant(restaurantRepository.getOne(restaurantId));
+        dish.setRestaurant(checkNotFound(restaurantRepository.get(restaurantId), "id=" + restaurantId));
         return repository.save(dish);
     }
 }

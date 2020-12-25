@@ -19,7 +19,7 @@ public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
     @Query("DELETE FROM Dish d WHERE d.id=:id")
     int delete(@Param("id") int id);
 
-    @Query("SELECT d FROM Dish d WHERE d.restaurant.id =:restaurantId AND d.date=:currentDate")
+    @Query("SELECT d FROM Dish d WHERE d.restaurant.id =:restaurantId AND d.date=:currentDate ORDER BY d.id ASC")
     List<Dish> getAll(@Param("restaurantId") int restaurantId, @Param("currentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate currentDate);
 
 }
